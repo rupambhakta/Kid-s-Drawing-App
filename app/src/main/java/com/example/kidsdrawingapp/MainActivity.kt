@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     /** Todo 2: create an ActivityResultLauncher with MultiplePermissions since we are requesting
      * both read and write
      */
-    val requestPermission: ActivityResultLauncher<Array<String>> =
+    private val requestPermission: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.forEach {
                 val perMissionName = it.key
