@@ -12,7 +12,7 @@
         android:layout_margin="5dp"
         android:padding="1dp"
         android:background="@drawable/background_drawing_view_layout"
-        app:layout_constraintBottom_toTopOf="@+id/paint_colors"
+        app:layout_constraintBottom_toTopOf="@+id/ll_paint_colors"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,9 +39,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/paint_colors"
+        android:id="@+id/ll_paint_colors"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/brushBtn"
+        app:layout_constraintBottom_toTopOf="@+id/ib_brush"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fl_drawing_view_container"
@@ -135,7 +135,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@+id/paint_colors"
+    app:layout_constraintTop_toBottomOf="@+id/ll_paint_colors"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +143,7 @@
     android:gravity="center">
 
 <ImageButton
-    android:id="@+id/btnBackgroundImage"
+    android:id="@+id/ib_gallery"
     android:layout_width="40dp"
     android:layout_height="40dp"
     android:layout_margin="5dp"
@@ -152,7 +152,7 @@
     android:src="@drawable/gallery"
     android:layout_marginEnd="5dp" />
     <ImageButton
-        android:id="@+id/brushBtn"
+        android:id="@+id/ib_brush"
         android:background="#ECF0F1"
         android:layout_width="40dp"
         android:layout_height="40dp"
