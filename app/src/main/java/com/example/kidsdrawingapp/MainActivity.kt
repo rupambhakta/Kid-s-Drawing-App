@@ -67,12 +67,11 @@ class MainActivity : AppCompatActivity() {
         ibBrush.setOnClickListener {
             showBrushSizeChooserDialog()
         }
-        val ibGallery: ImageButton = findViewById(R.id.ib_gallery)
-        //TODO(Step 10 : Adding an click event to image button for selecting the image from gallery.)
 
-        ibGallery.setOnClickListener {
-            requestStoragePermission()
-        }
+//        val ibGallery: ImageButton = findViewById(R.id.ib_gallery)
+//        ibGallery.setOnClickListener {
+//            requestStoragePermission()
+//        }
     }
 
     /**
