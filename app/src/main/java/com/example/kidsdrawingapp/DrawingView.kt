@@ -36,10 +36,12 @@ class DrawingView(context: Context,attrs:AttributeSet): View(context,attrs) {
 
     // TODO(Step 2 : A variable for array list of undo paths.)
     private val mUndoPaths = ArrayList<CustomPath>()
+    private val mRedoPaths = ArrayList<CustomPath>()
 
     init {
         setUpDrawing()
     }
+
 
     /**
      * This method initializes the attributes of the
@@ -179,6 +181,12 @@ class DrawingView(context: Context,attrs:AttributeSet): View(context,attrs) {
 
             mUndoPaths.add(mPaths.removeAt(mPaths.size - 1))
             invalidate() // Invalidate the whole view. If the view is visible
+        }
+    }
+    fun onClickRedo(){
+        if(mUndoPaths.size>0){
+            mPaths.add(mUndoPaths.removeAt(mUndoPaths.size-1))
+            invalidate()
         }
     }
     internal inner class CustomPath(var color:Int,var brushThickness:Float):Path()

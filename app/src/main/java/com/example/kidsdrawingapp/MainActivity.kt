@@ -1,6 +1,7 @@
 package com.example.kidsdrawingapp
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -70,6 +72,10 @@ class MainActivity : AppCompatActivity() {
         val ibUndo : ImageButton = findViewById(R.id.ib_undo)
         ibUndo.setOnClickListener {
             drawingView?.onClickUndo()
+        }
+        val ibRedo : ImageButton = findViewById(R.id.ib_redo)
+        ibRedo.setOnClickListener {
+            drawingView?.onClickRedo()
         }
 
 //        val ibGallery: ImageButton = findViewById(R.id.ib_gallery)

@@ -162,6 +162,15 @@
         android:src="@drawable/undo_img"
         android:scaleType="fitXY"
         android:layout_marginStart="5dp" />
+    <ImageButton
+        android:id="@+id/ib_redo"
+        android:background="#ECF0F1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/redo_img"
+        android:scaleType="fitXY"
+        android:layout_marginStart="5dp" />
 
     <ImageButton
         android:id="@+id/ib_brush"
