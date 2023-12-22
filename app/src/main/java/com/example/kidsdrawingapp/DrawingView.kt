@@ -178,7 +178,6 @@ class DrawingView(context: Context,attrs:AttributeSet): View(context,attrs) {
      */
     fun onClickUndo() {
         if (mPaths.size > 0) {
-
             mUndoPaths.add(mPaths.removeAt(mPaths.size - 1))
             invalidate() // Invalidate the whole view. If the view is visible
         }
