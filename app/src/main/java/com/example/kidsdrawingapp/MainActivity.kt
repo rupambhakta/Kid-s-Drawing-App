@@ -3,11 +3,14 @@ package com.example.kidsdrawingapp
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.media.MediaScannerConnection
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private var drawingView: DrawingView? = null
     private var mImageButtonCurrentPaint: ImageButton? =
         null // A variable for current color is picked from color pallet.
-
+    var customProgressDialog: Dialog? = null
     /** Todo 2: create an ActivityResultLauncher with MultiplePermissions since we are requesting
      * both read and write
      */
@@ -91,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         val ibSave : ImageButton = findViewById(R.id.ib_save)
         ibSave.setOnClickListener {
             if (isReadStorageAllowed()){
+                showProgressDialog()
                 lifecycleScope.launch{
                     val flDrawingView:FrameLayout = findViewById(R.id.fl_drawing_view_container)
                     saveBitmapFile(getBitmapFromView(flDrawingView))
@@ -234,8 +238,10 @@ class MainActivity : AppCompatActivity() {
 
                     result = f.absolutePath
                     runOnUiThread{
+                        cancelProgressDialog()
                         if (result.isNotEmpty()){
                             Toast.makeText(this@MainActivity,"File saved successfully:$result",Toast.LENGTH_LONG).show()
+                            shareImage(result)
                         }else{
                             Toast.makeText(this@MainActivity,"Something went wrong while saving the file.",Toast.LENGTH_LONG).show()
                         }
@@ -248,5 +254,42 @@ class MainActivity : AppCompatActivity() {
         }
         return result
     }
+    private fun showProgressDialog() {
+        customProgressDialog = Dialog(this@MainActivity)
 
+        /*Set the screen content from a layout resource.
+        The resource will be inflated, adding all top-level views to the screen.*/
+        customProgressDialog?.setContentView(R.layout.dislog_custom_progress)
+
+        //Start the dialog and display it on screen.
+        customProgressDialog?.show()
+    }
+
+    private fun cancelProgressDialog() {
+        if (customProgressDialog != null) {
+            customProgressDialog?.dismiss()
+            customProgressDialog = null
+        }
+    }
+
+    private fun shareImage(result: String){
+        MediaScannerConnection.scanFile(this, arrayOf(result),null){
+                path, uri ->
+            // This is used for sharing the image after it has being stored in the storage.
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.putExtra(
+                Intent.EXTRA_STREAM,
+                uri
+            ) // A content: URI holding a stream of data associated with the Intent, used to supply the data being sent.
+            shareIntent.type =
+                "image/png" // The MIME type of the data being handled by this intent.
+            startActivity(
+                Intent.createChooser(
+                    shareIntent,
+                    "Share"
+                )
+            )
+        }
+    }
 }
